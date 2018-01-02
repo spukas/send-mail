@@ -5,7 +5,14 @@
   "rules": {
     "react/jsx-filename-extension": ["off", "never"],
     "import/prefer-default-export": ["off", "never"],
-    "import/no-named-as-default": ["off", "never"]
+    "import/no-named-as-default": ["off", "never"],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"]
+      }
+    ]
   },
   "env": {
     "browser": true,
