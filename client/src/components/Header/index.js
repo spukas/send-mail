@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payments from '../Payments';
 
 class Header extends Component {
+  static propTypes = {
+    auth: PropTypes.shape({
+      googleId: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+    }),
+  };
+
+  static defaultProps = {
+    auth: null,
+  };
+
   renderContent = () => {
     const { auth } = this.props;
-    console.log({ auth });
     const content = () => {
       if (auth === null) {
         return null;
