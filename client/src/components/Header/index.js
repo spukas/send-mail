@@ -6,10 +6,7 @@ import Payments from '../Payments';
 
 class Header extends Component {
   static propTypes = {
-    auth: PropTypes.shape({
-      googleId: PropTypes.string.isRequired,
-      _id: PropTypes.string.isRequired,
-    }),
+    auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   };
 
   static defaultProps = {
@@ -28,6 +25,7 @@ class Header extends Component {
           </li>
         );
       }
+
       return [
         <li key="1">
           <Payments />
