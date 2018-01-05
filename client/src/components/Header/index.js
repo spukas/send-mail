@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payments from '../Payments';
+import './index.css';
 
 class Header extends Component {
   static propTypes = {
@@ -29,6 +30,9 @@ class Header extends Component {
       return [
         <li key="1">
           <Payments />
+        </li>,
+        <li key="3" className="header__list-item--space">
+          Credits: {auth.credits}
         </li>,
         <li key="2">
           <a href="/api/logout">Logout</a>
