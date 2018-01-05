@@ -3,7 +3,7 @@ const stripe = require('stripe')(keys.stripeSecretKey);
 
 module.exports = (app) => {
   app.post('/api/stripe', async (req, res) => {
-    const { id: stripeToken, user: userModel } = req.body;
+    const { body: { id: stripeToken }, user: userModel } = req;
     const chargeObject = await stripe.charges.create({
       amount: 500,
       currency: 'usd',
