@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import { connect } from 'react-redux';
@@ -11,19 +12,23 @@ const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 
 class App extends Component {
+  static propTypes = {
+    fetchUser: PropTypes.func.isRequired,
+  };
+
   componentDidMount() {
     this.props.fetchUser();
   }
 
   render() {
     return (
-      <div className={'container'}>
+      <div className="container">
         <BrowserRouter>
           <div>
             <Header />
-            <Route exact path={'/'} component={Landing} />
-            <Route exact path={'/surveys'} component={Dashboard} />
-            <Route path={'/surveys/new'} component={SurveyNew} />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/surveys" component={Dashboard} />
+            <Route path="/surveys/new" component={SurveyNew} />
           </div>
         </BrowserRouter>
       </div>
