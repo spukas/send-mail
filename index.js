@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
 const { mongoURI, cookieKey } = require('./config/keys');
 require('./models/User');
+require('./models/Surveys');
 require('./services/passport');
 
 mongoose.connect(mongoURI);
