@@ -7,6 +7,8 @@ const surveyTemplate = require('../services/mailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
+  // TODO: use 'res'
+  // eslint-disable-next-line no-unused-vars
   app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
     const {
       title, subject, body, recipients,

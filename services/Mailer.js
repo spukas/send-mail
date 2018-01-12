@@ -18,6 +18,7 @@ class Mailer extends helper.Mail {
     this.addRecipients();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   formatAddresses(recipients) {
     return recipients.map(({ email }) => new helper.Email(email));
   }

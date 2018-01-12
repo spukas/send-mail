@@ -5,6 +5,8 @@ const requireLogin = require('../middlewares/requireLogin');
 module.exports = (app) => {
   app.post('/api/stripe', requireLogin, async (req, res) => {
     const { body: { id: stripeToken }, user: userModel } = req;
+    // TODO: use chargeObject; remove eslint error
+    // eslint-disable-next-line no-unused-vars
     const chargeObject = await stripe.charges.create({
       amount: 500,
       currency: 'usd',
