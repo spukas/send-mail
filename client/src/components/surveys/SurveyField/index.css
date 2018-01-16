@@ -1,0 +1,7 @@
+.survey-field__input--space {
+  margin: 0 !important;
+}
+
+.survey-field__error--space {
+  margin-bottom: 20px;
+}

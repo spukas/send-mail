@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import SurveyField from '../SurveyField';
 
 const FIELDS = [
-  { label: 'Survey label', htmlFor: 'surveyLavel', name: 'title' },
+  { label: 'Survey title', htmlFor: 'surveyLavel', name: 'title' },
   { label: 'Subject line', htmlFor: 'subjectLine', name: 'subject' },
   { label: 'Email body', htmlFor: 'emailBody', name: 'body' },
   { label: 'Recipient list', htmlFor: 'recipientList', name: 'emails' },
@@ -47,6 +47,19 @@ class SurveyForm extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  FIELDS.forEach(({ name }) => {
+    if (!values[name]) {
+      errors[name] = `You must provide a ${name}`;
+    }
+  });
+
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: 'surveyForm',
 })(SurveyForm);
