@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
+import { Link } from 'react-router-dom';
 
 import SurveyField from '../SurveyField';
 
@@ -34,9 +35,12 @@ class SurveyForm extends Component {
     return (
       <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
         {this.renderFields()}
-        <button className="btn waves-effect waves-light" type="submit" name="action">
-          Submit
-          <i className="material-icons right">send</i>
+        <Link to="/surveys" className="btn red waves-effect waves-light">
+          Cancel
+        </Link>
+        <button className="btn waves-effect waves-light right" type="submit" name="action">
+          Next
+          <i className="material-icons right">done</i>
         </button>
       </form>
     );
