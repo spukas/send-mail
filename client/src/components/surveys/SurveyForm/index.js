@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 
+import validateEmails from '../../../utils/validateEmails';
 import SurveyField from '../SurveyField';
 
 const FIELDS = [
@@ -55,6 +56,8 @@ function validate(values) {
       errors[name] = `You must provide a ${name}`;
     }
   });
+
+  errors.emails = validateEmails(values.emails || '');
 
   return errors;
 }
