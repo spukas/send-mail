@@ -16,9 +16,10 @@ const FIELDS = [
 class SurveyForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    onSurveySubmit: PropTypes.func.isRequired,
   };
 
-  handleFormSubmit = value => console.log(value);
+  handleFormSubmit = () => this.props.onSurveySubmit();
 
   renderFields = () =>
     FIELDS.map(({ label, htmlFor, name }) => (
