@@ -8,14 +8,17 @@ class SurveyNew extends Component {
     showReview: false,
   };
 
-  handleSurveySubmit = () => this.setState({ showReview: true });
+  toggleShowReview = () =>
+    this.setState(prev => ({
+      showReview: !prev.showReview,
+    }));
 
   renderContent = () => {
     if (this.state.showReview) {
-      return <SurveyFormReview />;
+      return <SurveyFormReview onCancel={this.toggleShowReview} />;
     }
 
-    return <SurveyForm onSurveySubmit={this.handleSurveySubmit} />;
+    return <SurveyForm onSurveySubmit={this.toggleShowReview} />;
   };
 
   render() {
