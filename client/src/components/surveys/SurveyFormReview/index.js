@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import * as actions from '../../../actions/index';
 import FIELDS from '../formFields';
@@ -16,29 +17,39 @@ class SurveyFormReview extends Component {
       recipients: PropTypes.string.isRequired,
     }).isRequired,
     submitSurvey: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
-  renderFields = values =>
-    FIELDS.map(({ label, htmlFor, name }) => (
+  handleSendSurvey = () => {
+    const { submitSurvey, formValues, history: { push } } = this.props;
+    submitSurvey(formValues, push);
+  };
+
+  renderFields = () => {
+    const { formValues } = this.props;
+
+    return FIELDS.map(({ label, htmlFor, name }) => (
       <div key={name}>
         <label htmlFor={htmlFor}>label</label>
-        <div>{values[name]}</div>
+        <div>{formValues[name]}</div>
       </div>
     ));
+  };
 
   render() {
-    const { formValues } = this.props;
     return (
       <div>
         <h3>Survey Form Review</h3>
-        {this.renderFields(formValues)}
+        {this.renderFields()}
         <button className="btn yellow darken-3" onClick={this.props.onCancel}>
           Back
         </button>
         <button
           className="btn waves-effect waves-light right"
           name="action"
-          onClick={() => this.props.submitSurvey(formValues)}
+          onClick={this.handleSendSurvey}
         >
           Send Survey
           <i className="material-icons right">send</i>
@@ -54,4 +65,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(SurveyFormReview);
+export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));
