@@ -5,13 +5,7 @@ import { Link } from 'react-router-dom';
 
 import validateEmails from '../../../utils/validateEmails';
 import SurveyField from '../SurveyField';
-
-const FIELDS = [
-  { label: 'Survey title', htmlFor: 'surveyLavel', name: 'title' },
-  { label: 'Subject line', htmlFor: 'subjectLine', name: 'subject' },
-  { label: 'Email body', htmlFor: 'emailBody', name: 'body' },
-  { label: 'Recipient list', htmlFor: 'recipientList', name: 'emails' },
-];
+import FIELDS from '../formFields';
 
 class SurveyForm extends Component {
   static propTypes = {
@@ -66,4 +60,5 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'surveyForm',
+  destroyOnUnmount: false,
 })(SurveyForm);
