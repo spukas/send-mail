@@ -13,7 +13,7 @@ class SurveyFormReview extends Component {
       title: PropTypes.string.isRequired,
       subject: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
-      emails: PropTypes.string.isRequired,
+      recipients: PropTypes.string.isRequired,
     }).isRequired,
     submitSurvey: PropTypes.func.isRequired,
   };
