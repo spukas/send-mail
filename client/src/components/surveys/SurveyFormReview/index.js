@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import * as actions from '../../../actions/index';
 import FIELDS from '../formFields';
 
 // eslint-disable-next-line
@@ -14,6 +15,7 @@ class SurveyFormReview extends Component {
       body: PropTypes.string.isRequired,
       emails: PropTypes.string.isRequired,
     }).isRequired,
+    submitSurvey: PropTypes.func.isRequired,
   };
 
   renderFields = values =>
@@ -30,8 +32,16 @@ class SurveyFormReview extends Component {
       <div>
         <h3>Survey Form Review</h3>
         {this.renderFields(formValues)}
-        <button className="yellow darken-3 btn-flat" onClick={this.props.onCancel}>
+        <button className="btn yellow darken-3" onClick={this.props.onCancel}>
           Back
+        </button>
+        <button
+          className="btn waves-effect waves-light right"
+          name="action"
+          onClick={() => this.props.submitSurvey(formValues)}
+        >
+          Send Survey
+          <i className="material-icons right">send</i>
         </button>
       </div>
     );
@@ -44,4 +54,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SurveyFormReview);
+export default connect(mapStateToProps, actions)(SurveyFormReview);
