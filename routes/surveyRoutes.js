@@ -1,3 +1,4 @@
+const { URL } = require('url');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -10,7 +11,26 @@ module.exports = (app) => {
   app.get('/api/surveys/thanks', (req, res) => res.send('Thank you for voting'));
 
   app.post('/api/surveys/webhooks', (req, res) => {
-    console.log(req.body);
+    const events = req.body
+      .map(({ email, url }) => {
+        const eventUrl = new URL(url);
+        const urlPath = eventUrl.pathname;
+
+        if (urlPath) {
+          const [, , , surveyId, choice] = urlPath.split('/');
+
+          return {
+            surveyId,
+            choice,
+            email,
+          };
+        }
+
+        return undefined;
+      })
+      .filter(event => !event);
+
+    // TODO write a function that filters out duplicate entries
 
     res.send({});
   });
