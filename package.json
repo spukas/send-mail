@@ -10,10 +10,11 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "(cd ./client && yarn start)",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "dev": "concurrently \"yarn server\" \"yarn client\" \"yarn webhook\"",
     "client-install": "(cd ./client && yarn install)",
     "client-build": "(cd ./client && yarn run build)",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn run client-install && yarn run client-build",
+    "webhook": "lt -p 5000 -s lspkwbhkpst"
   },
   "license": "MIT",
   "dependencies": {
@@ -21,6 +22,7 @@
     "concurrently": "^3.5.0",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
+    "localtunnel": "^1.8.3",
     "mongoose": "^4.13.2",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
