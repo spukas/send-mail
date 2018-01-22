@@ -4,6 +4,7 @@ const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/mailTemplates/surveyTemplate');
+const groupBy = require('../utils/groupBy');
 
 const Survey = mongoose.model('surveys');
 
@@ -30,9 +31,9 @@ module.exports = (app) => {
       })
       .filter(event => !event);
 
-    // TODO write a function that filters out duplicate entries
+    const groupedEvents = groupBy(events, 'email', 'surveyId');
 
-    res.send({});
+    res.send(groupedEvents);
   });
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
