@@ -29,11 +29,24 @@ module.exports = (app) => {
 
         return undefined;
       })
-      .filter(event => !event);
+      .filter(event => event !== undefined);
 
-    const groupedEvents = groupBy(events, 'email', 'surveyId');
+    groupBy(events, 'email', 'surveyId').forEach(({ surveyId, email, choice }) => {
+      Survey.updateOne(
+        {
+          _id: surveyId,
+          recipients: {
+            $elemMatch: { email, responded: false },
+          },
+        },
+        {
+          $inc: { [choice]: 1 },
+          $set: { responded: true },
+        },
+      ).exec();
+    });
 
-    res.send(groupedEvents);
+    res.send({});
   });
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {

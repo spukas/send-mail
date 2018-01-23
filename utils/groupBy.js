@@ -20,4 +20,4 @@ const groupBy = (data, arg1, arg2) =>
     return res;
   }, []);
 
-export default groupBy;
+module.exports = groupBy;
