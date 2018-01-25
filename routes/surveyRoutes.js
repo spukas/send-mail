@@ -9,7 +9,7 @@ const groupBy = require('../utils/groupBy');
 const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
-  app.get('/api/surveys/thanks', (req, res) => res.send('Thank you for voting'));
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => res.send('Thank you for voting'));
 
   app.post('/api/surveys/webhooks', (req, res) => {
     const events = req.body
@@ -42,6 +42,7 @@ module.exports = (app) => {
         {
           $inc: { [choice]: 1 },
           $set: { 'recipients.$.responded': true },
+          lastResponded: new Date(),
         },
       ).exec();
     });
